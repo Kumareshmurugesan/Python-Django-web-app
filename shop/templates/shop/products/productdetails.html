@@ -1,0 +1,44 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+ home | online shopping
+{% endblock title %}
+{% block content %}
+
+<section class="bg-light py-4 my-5" style="min-height: 600px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">{{products}} Details</h4>
+                <hr style="border-color:#b8bfc2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'collections' products.catagory.name %}">Collection</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
+                    </ol>
+                  </nav>
+                  {% include 'shop/inc/message.html' %}
+            </div>
+            <div class="col-4 my-3 pic-box">
+                <div class="hot">Hot</div>
+            <img src="{{products.product_image.url}}" class="card-image-top" alt="{{products}}">
+            </div>
+            <div class="col-10 my-3">
+                <h5 class="text-success">{{products | upper}}</h5>
+                <P>{{products.vendor}}</P>
+                <p>{{products.description}}</p>
+            </div>
+            <h6 class="my-2 text-primary">Current Price :Rs.<s>{{products.actual_price}}</s></h6>
+            <h5 class="my-2 text-success">Selling Price :Rs.{{products.selling_price}}</h5>
+            <div class="my-3">
+                {% if products.quantity > 0 %}
+                <button class="btn btn-primary"><i class="fa fa-shopping-cart">Add to Cart</i></button>
+                {% else %}
+                <button class="btn btn-primary"><i class="fa fa-shopping-cart">Out of stock</i></button>
+                 {% endif %}
+                <button class="btn btn-danger"><i class="fa fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
